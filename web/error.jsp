@@ -1,0 +1,56 @@
+<%@page isErrorPage="true" %>
+<%@page import="command.verification.VerifyLogin" %>
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+<%
+            boolean maintenanceMode = false;
+            if (maintenanceMode)
+            {
+%>pachume is in maintenance mode and will be operational again soon, sorry for the inconvienince<%
+            } else
+            {
+                String goTo = "explore.jsp?";
+                String screenName = null;
+                String userPassword = null;
+                String saveSession = null;
+                Cookie[] cookieList = null;
+                try
+                {
+                    if (session.getAttribute("thisUser") == null)
+                    {
+                        if (request.getCookies() != null)
+                        {
+                            cookieList = request.getCookies();
+                            for (int i = 0; i < cookieList.length; i++)
+                            {
+                                Cookie thisCookie = cookieList[i];
+                                if (thisCookie.getName().startsWith("usr"))
+                                {
+                                    screenName = thisCookie.getValue();
+                                }
+                                if (thisCookie.getName().startsWith("pas"))
+                                {
+                                    userPassword = thisCookie.getValue();
+                                }
+                                saveSession = "true";
+                            }
+                            goTo = VerifyLogin.run(screenName, userPassword, request, response, saveSession);
+                        }
+
+                        if (goTo.contains("?"))
+                        {
+                            goTo = goTo.substring(0, goTo.indexOf("?"));
+                        }
+
+                    } else
+                    {
+                        goTo = "/";
+                    }
+
+                } catch (Exception e)
+                {
+                    System.out.print(e.getLocalizedMessage());
+                }
+                response.sendRedirect(goTo);
+            }
+%>

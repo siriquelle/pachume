@@ -1,0 +1,87 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package command.pachume;
+
+import command.conversion.MakeCompatable;
+import java.sql.ResultSet;
+import java.util.Calendar;
+import model.DataBaseConnection;
+
+/**
+ *
+ * @author Siriquelle
+ */
+public class MakePachume {
+    //<editor-fold defaultstate="collapsed" desc="pachume">
+    public static int run(int userId, String pachume, String tags, String role, boolean privatized, String location, int channelId, String channelName, String groupId) {
+
+        Calendar cal = Calendar.getInstance();
+
+        int dateSecond = cal.get(Calendar.SECOND);
+        int dateMinute = cal.get(Calendar.MINUTE);
+        int dateHour = cal.get(Calendar.HOUR_OF_DAY);
+        int dateDay = cal.get(Calendar.DAY_OF_MONTH);
+        int dateMonth = cal.get(Calendar.MONTH);
+        int dateYear = cal.get(Calendar.YEAR);
+        int dateYearDay = cal.get(Calendar.DAY_OF_YEAR);
+
+        int pachumeId = -1;
+
+        pachume = MakeCompatable.run(pachume);
+        pachume = pachume.replaceAll("<br />", "");
+        
+        tags = MakeCompatable.run(tags);
+        if (!location.contains("/group/") && !location.contains("/channel/"))
+          {
+            location = MakeCompatable.run(location);
+          }
+
+        if (location.length() > 1)
+          {
+            location = " from " + location;
+          }
+
+        try
+          {
+
+            DataBaseConnection pachume_table_connection;
+            pachume_table_connection = new DataBaseConnection();
+            pachume_table_connection.connect();
+            String pachume_table_connection_sql = "INSERT INTO pachume (pachume, userId, dateSecond, dateMinute, dateHour, dateDay, dateMonth, dateYear, dateYearDay, channelId, tags, role, privatized, location, channelName, groupId)" +
+                    " VALUES ('" + pachume + "'," + userId + ", " + dateSecond + ", " + dateMinute + ", " + dateHour + ", " + dateDay + ", " + dateMonth + ", " + dateYear + ", " + dateYearDay + ", " + channelId + ", '" + tags + "', '" + role + "', " + privatized + ", '" + location + "', '" + channelName + "', '" + groupId + "')";
+            pachume_table_connection.execUpdate(pachume_table_connection_sql);
+            pachume_table_connection.close();
+
+          } catch (Exception e)
+          {
+            System.out.print("INSERT FAILED: " + e);
+            pachumeId = -1;
+          }
+
+        try
+          {
+            DataBaseConnection pachumeId_db = new DataBaseConnection();
+            pachumeId_db.connect();
+
+            String pachumeId_sql = "SELECT pachumeId FROM pachume WHERE userId = " + userId + " ORDER BY pachumeId DESC LIMIT 1;";
+
+            ResultSet pachumeId_rs = pachumeId_db.execSQL(pachumeId_sql);
+
+            if (pachumeId_rs.next())
+              {
+                pachumeId = pachumeId_rs.getInt("pachumeId");
+              }
+
+            pachumeId_db.close();
+
+          } catch (Exception e)
+          {
+            System.out.print("GET PACHUME ID FAILED: " + e);
+            pachumeId = -1;
+          }
+
+        return pachumeId;
+    }// </editor-fold>
+}

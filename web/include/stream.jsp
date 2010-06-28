@@ -1,0 +1,230 @@
+<%@ page import="command.user.*, command.pachume.*, model.*, bean.streamBean, java.sql.ResultSet, command.time.GetTime, command.comment.*, command.channel.GetUsersChannels,  command.group.GetUsersGroups, command.verification.* ,java.util.Vector, java.util.Iterator, java.util.Enumeration; " %>
+
+<%
+
+        streamBean thisStream = new streamBean(request);
+
+        String sql1 = "";
+
+        int thisUser_userId = thisStream.getThisUser_userId();
+        String requestFrom = thisStream.getRequestFrom();
+        String q = thisStream.getQ();
+        int p = thisStream.getP();
+        int channelId = thisStream.getChanelId();
+        String groupId = thisStream.getGroupId();
+
+        Vector usersGroups = GetUsersGroups.run(thisUser_userId);
+        String groupList = "";
+        Iterator groupIterator = usersGroups.iterator();
+        while (groupIterator.hasNext()) {
+            groupList += ("'" + groupIterator.next().toString() + "',");
+        }
+
+        if (requestFrom.equals("stream")) {
+
+            Vector usersContacts = GetUsersContacts.run(thisUser_userId);
+            String contactList = "";
+            Iterator contactsIterator = usersContacts.iterator();
+            while (contactsIterator.hasNext()) {
+                contactList += contactsIterator.next().toString() + ",";
+            }
+
+            Vector usersChannels = GetUsersChannels.run(thisUser_userId);
+            String channelList = "";
+            Iterator channelIterator = usersChannels.iterator();
+            while (channelIterator.hasNext()) {
+                channelList += channelIterator.next().toString() + ",";
+            }
+
+            sql1 = "SELECT * FROM pachume WHERE pachume.channelId IN (" + channelList + "'-1000') OR pachume.groupId IN (" + groupList + "'00000000-0000-0000-0000-000000000000') AND pachume.userId IN (" + contactList + thisUser_userId + ") ORDER BY pachume.pachumeId DESC LIMIT 20 OFFSET " + p;
+        }
+
+        if (requestFrom.equalsIgnoreCase("explore")) {
+            sql1 = "Select * FROM pachume, tag WHERE tag.tag like '%" + q + "%' AND pachume.pachumeId = tag.pachumeId AND pachume.groupId IN (" + groupList + "'00000000-0000-0000-0000-000000000000') GROUP BY pachume.pachumeId ORDER BY pachume.pachumeId DESC LIMIT 20 OFFSET " + p;
+        }
+
+        if (requestFrom.equalsIgnoreCase("pachume")) {
+            sql1 = "Select * FROM pachume WHERE pachume.pachume like '%" + q + "%'ORDER BY pachume.pachumeId DESC LIMIT 20 OFFSET " + p;
+        }
+
+        if (requestFrom.equalsIgnoreCase("viewAll")) {
+            sql1 = "Select * FROM pachume WHERE pachume.groupId IN ('00000000-0000-0000-0000-000000000000') ORDER BY pachume.pachumeId DESC LIMIT 20 OFFSET " + p;
+        }
+
+        if (requestFrom.equalsIgnoreCase("people")) {
+            sql1 = "Select * FROM pachume, user WHERE user.screenName = '" + q + "' AND pachume.userId = user.userId ORDER BY pachume.pachumeId DESC LIMIT 1 OFFSET " + p;
+        }
+
+        if (requestFrom.equalsIgnoreCase("profile")) {
+            sql1 = "SELECT * FROM pachume WHERE userId =" + thisUser_userId + " AND pachume.groupId NOT IN (" + groupList + "'-1000') ORDER BY pachumeId DESC LIMIT 20 OFFSET " + p;
+        }
+
+        if (requestFrom.equalsIgnoreCase("channel")) {
+            sql1 = "SELECT * FROM pachume WHERE channelId =" + channelId + " ORDER BY pachumeId DESC LIMIT 20 OFFSET " + p;
+        }
+
+        if (requestFrom.equalsIgnoreCase("group")) {
+            sql1 = "SELECT * FROM pachume WHERE groupId ='" + groupId + "' ORDER BY pachumeId DESC LIMIT 20 OFFSET " + p;
+        }
+
+        DataBaseConnection presence_container_first_db = new DataBaseConnection();
+        presence_container_first_db.connect();
+
+        String presence_container_first_sql = sql1;
+
+        ResultSet presence_container_first_rs = presence_container_first_db.execSQL(presence_container_first_sql);
+
+        String pachume = "";
+        int pachumeId = -1;
+        int pachume_userId = -1;
+
+        String pachume_screenName = "";
+        String pachume_pachumeImageLocation = "";
+
+        int presanceCount = 0;
+
+        if (presence_container_first_rs.first()) {
+            presence_container_first_rs.previous();
+            while (presence_container_first_rs.next()) {
+                presanceCount++;
+
+                pachume = presence_container_first_rs.getString("pachume.pachume");
+                pachumeId = presence_container_first_rs.getInt("pachume.pachumeId");
+                pachume_userId = presence_container_first_rs.getInt("pachume.userId");
+
+                pachume_screenName = GetScreenName.run(pachume_userId).trim();
+                pachume_pachumeImageLocation = GetPachumeImageLocation.run(pachume_userId).trim();
+
+%>                       
+<div class="stream_presence_container_default" >
+
+    <div class="stream_presence_image_container">
+        <a href="/profile/<%=pachume_screenName%>" title="<%=pachume_screenName%>">
+    <img class="stream_presence_image" alt="<%= pachume_screenName%>" src="<%= pachume_pachumeImageLocation%>" width="40px" height="40px" />        </a>    </div>
+
+    <div class="stream_presence_body_container" >
+
+        <div class="stream_presence_body_pachume">
+            <p class="viewport_valid_element_container">
+                <a href="/comment/<%=pachumeId%>" class="inlink" >
+                    <%=pachume.trim()%>
+                </a>
+            </p>
+        </div>
+
+        <div class="stream_presence_body_meta">
+
+            By <%= pachume_screenName%>
+            <a href="/comment/<%=pachumeId%>"  >
+                <%if (CountComments.run(pachumeId) > 0) {%>
+                [<span class="stream_presence_body_meta_comment_count" ><%= CountComments.run(pachumeId)%></span>]
+                <%}%>
+
+                add comment
+
+            </a>
+            <%= GetTime.run("pachume", "pachumeId", pachumeId)%>
+            <%= GetPacumeLocation.run(pachumeId)%>
+
+            <%= IsDeleatable.run(pachumeId, session)%>
+            <%= IsSpamable.run(thisUser_userId, pachumeId, session)%>
+        </div>
+
+        <div class="stream_presence_body_tags">
+
+            <%
+                Vector pachumeTags = GetPachumeTags.run(pachumeId);
+
+                Iterator iter = pachumeTags.listIterator();
+
+                String tagDefault = "stream_presence_body_tags_default";
+                String tagActive = "stream_presence_body_tags_active";
+
+                String stream_presence_body_tags = tagDefault;
+
+                while (iter.hasNext()) {
+                    String nextElement = iter.next().toString();
+
+                    if (nextElement.toString().equalsIgnoreCase(q)) {
+                        stream_presence_body_tags = tagActive;
+                    }
+
+            %>
+            <span class="<%= stream_presence_body_tags%>"  > <a href="/search.jsp?requestFrom=explore&amp;q=<%= nextElement%>" ><%= nextElement%></a></span>
+            <%
+                    stream_presence_body_tags = tagDefault;
+                }
+            %>
+
+        </div>
+
+    </div>
+</div>
+<%}
+        } else {%>
+
+<div class="stream_presence_container_default" >
+
+    <div class="stream_presence_image_container">
+        <a href="/profile/Siriquelle" title="Siriquelle">
+            <img class="stream_presence_image" alt="Siriquelle" src="<%=GetPachumeImageLocation.run(1)%>" width="40px" height="40px" />
+        </a>
+    </div>
+
+    <div class="stream_presence_body_container" >
+        <div class="stream_presence_body_pachume">
+            Nothin' there just yet captain!!
+        </div>
+        <div class="stream_presence_body_meta">
+            By Siriquelle, just now, from aboard the Black Peril,
+        </div>
+        <div class="stream_presence_body_tags">
+            <span class="stream_presence_body_tags_default"  > <a href="/search.jsp?requestFrom=explore&amp;q=pirates" >pirates</a></span>
+        </div>
+    </div>
+</div>
+
+<%}
+        presence_container_first_db.close();
+%>
+
+<%
+        boolean show_navigation = true;
+        if (presanceCount < 20 && p < 20) {
+            show_navigation = false;
+        }
+
+        boolean show_newer = true;
+        if (p < 20) {
+            show_newer = false;
+        } else if (p > 200) {
+            p = 200;
+            show_newer = false;
+        }
+
+        boolean show_older = true;
+        if (presanceCount < 20) {
+            show_older = false;
+        }
+%>
+
+
+<%
+        String goTo = request.getContextPath();
+
+//goTo = goTo.replace(goTo.substring(goTo.indexOf(".jsp")+4, goTo.length()), "");
+
+%>
+
+<%if (show_navigation) {%>
+<div class="stream_navigation" >
+
+    <%if (show_newer) {%>
+    <span class="stream_navigation_new" ><a href="<%=goTo%>?p=<%= p - 20%>" >newer</a></span>
+    <%}%>
+
+    <%if (show_older) {%>
+    <span class="stream_navigation_old" ><a href="<%=goTo%>?p=<%= p + 20%>">older</a></span>
+    <%}%>
+</div>
+<%}%>

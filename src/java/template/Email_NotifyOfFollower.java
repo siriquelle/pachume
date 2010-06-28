@@ -1,0 +1,71 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package template;
+
+import bean.userBean;
+import command.user.GetScreenNameFromEmail;
+
+/**
+ *
+ * @author Siriquelle
+ */
+public class Email_NotifyOfFollower implements Email {
+
+    private String lba = Email.lb1;
+    private String lbb = Email.lb2;
+    private String styles = Email.style;
+//    
+    private String subject = "[pachume] ";
+    private String body = "";
+    private String screenName = "";
+    private String followersScreenName = "";
+
+    public Email_NotifyOfFollower(String usersEmail, String friendEmail) {
+
+        screenName = GetScreenNameFromEmail.run(usersEmail.trim());
+        followersScreenName = GetScreenNameFromEmail.run(friendEmail.trim());
+        userBean mailRecipient = new userBean(followersScreenName.trim());
+
+        subject += "'" + screenName + "' is following you on pachume";
+        
+        body += styles;
+        body += "<div class=\"style\">";
+        body += "Hi " + mailRecipient.getFirstName() + ",";
+        body += lbb;
+        body += "You have a new follower on <a href=\"http://pachume.com\" >pachume.com</a>.";
+        body += lbb;
+        body += "If you want to see their pachume stream click on the following link:";
+        body += lbb;
+        body += "................";
+        body += lbb;
+        body += "<a href=\"http://pachume.com/profile/" + screenName + "\" >http://pachume.com/profile/" + screenName + "</a>";
+        body += lbb;
+        body += "................";
+        body += lbb;
+        body += "If you have any problems signing in, please send an email";
+        body += lba;
+        body += "to <a href=\"mailto:help@pachume.com\">help@pachume.com</a> and we will get right on it.";
+        body += lbb;
+        body += "See you there,";
+        body += lbb;
+        body += "James Hogan,";
+        body += lbb;
+        body += "(The lazy guy,)";
+        body += lbb;
+        body += "<a href=\"http://pachume.com\" >http://pachume.com</a>";
+        body += lbb;
+        body += lbb;
+        body += "</div>";
+
+    }
+
+    public String getSubject() {
+        return this.subject;
+    }
+
+    public String getBody() {
+        return this.body;
+    }
+}

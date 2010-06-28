@@ -1,0 +1,21 @@
+D
+/DestroyGroup.java/1.2/Mon Feb 23 11:21:26 2009//
+/DoesGroupExist.java/1.2/Mon Feb 23 11:21:26 2009//
+/FollowGroup.java/1.2/Mon Feb 23 11:21:26 2009//
+/GetGroupAuthorBean.java/1.2/Mon Feb 23 11:21:25 2009//
+/GetGroupAuthorCount.java/1.2/Mon Feb 23 11:21:26 2009//
+/GetGroupAvatarLocation.java/1.2/Mon Feb 23 11:21:26 2009//
+/GetGroupId.java/1.2/Mon Feb 23 11:21:25 2009//
+/GetGroupMembers.java/1.2/Mon Feb 23 11:21:26 2009//
+/GetGroupName.java/1.2/Mon Feb 23 11:21:26 2009//
+/GetUsersGroups.java/1.2/Mon Feb 23 11:21:25 2009//
+/IsGroupNameAvailable.java/1.2/Mon Feb 23 11:21:26 2009//
+/IsUserGroupsAuthor.java/1.2/Mon Feb 23 11:21:26 2009//
+/IsUserJoinedGroup.java/1.2/Mon Feb 23 11:21:26 2009//
+/MakeGroup.java/1.2/Mon Feb 23 11:21:25 2009//
+/ResetGroupId.java/1.2/Mon Feb 23 11:21:26 2009//
+/StopFollowingGroup.java/1.2/Mon Feb 23 11:21:26 2009//
+/UpdateGroupAvatarLocation.java/1.2/Mon Feb 23 11:21:26 2009//
+/UpdateGroupBackgroundColor.java/1.2/Mon Feb 23 11:21:25 2009//
+/UpdateGroupBackgroundImageLocation.java/1.2/Mon Feb 23 11:21:25 2009//
+/UpdateGroupBackgroundImageRepeat.java/1.2/Mon Feb 23 11:21:25 2009//

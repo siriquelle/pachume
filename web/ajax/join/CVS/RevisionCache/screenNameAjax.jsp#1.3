@@ -1,0 +1,15 @@
+<%@page import="command.verification.IsScreenNameAvailable" %>
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+
+<% if (request.getParameter("screenName") != null)
+              {
+                String screenName = request.getParameter("screenName");
+                if (IsScreenNameAvailable.run(screenName))
+                  {%>
+:) <img src="/media/images/join_validation_success.png" width="17px" height="17px"/> 
+<%} else
+  {%>
+:( <img src="/media/images/join_validation_failure.png" width="17px" height="17px"/> 
+<%}%>
+<%}%>

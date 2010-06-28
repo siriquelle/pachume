@@ -1,0 +1,166 @@
+<%@ page errorPage="/error.jsp" %>
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+<%@page import="bean.LoginBean"%>
+<%
+            LoginBean loginBean = null;
+
+            if (session.getAttribute("loginBean") == null)
+            {
+                loginBean = new LoginBean();
+            } else
+            {
+                loginBean = (LoginBean) session.getAttribute("loginBean");
+            }
+
+%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    
+    <head>
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+        <title>pachume | join</title>
+        
+        <link rel="shortcut icon" href="/media/images/favicon.png" />
+        
+        <link rel="stylesheet" type="text/css" href="/media/css/feedback.css" />
+        
+        <link rel="stylesheet" type="text/css" href="/media/css/viewport.css" />
+        
+        <link rel="stylesheet" type="text/css" href="/media/css/head.css" />
+        
+        <link rel="stylesheet" type="text/css" href="/media/css/logo.css" />
+        
+        <link rel="stylesheet" type="text/css" href="/media/css/footer.css" />
+        
+        <link rel="stylesheet" type="text/css" href="/media/css/default.css" />
+        
+        <link rel="stylesheet" type="text/css" href="/media/css/join.css" />
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
+        
+        <script src="http://jqueryjs.googlecode.com/svn-history/r5326/trunk/plugins/color/jquery.color.js" type="text/javascript"></script>
+        <script src="/media/js/join_verify.js" type="text/javascript"></script>
+        
+    </head>
+    
+    <body  style="background-image:url(/media/images/bg.png); background-repeat: repeat;" >
+        
+        <div class="viewport_outer_container_page">
+            
+            <div class="head_background_layer" ></div>
+            
+            <div class="viewport_inner_container_page">
+                
+                <jsp:include flush="true" page="/include/head_inactive.jsp" >
+                    <jsp:param name="requestFrom" value="join" />    
+                </jsp:include>
+                
+                <div class="viewport_outer_container_body">
+                    
+                    <div class="default_right_column_container">
+                        
+                        <div class="default_right_column_top_head" >Why pachume?</div>
+                        
+                        <div class="join_right_column_body">
+                            
+                            <div class="join_right_column_body_bullet"></div>
+                            Explore pachume's dirverse community of interesting people
+                        </div>
+                        
+                        <div class="join_right_column_body">
+                            
+                            <div class="join_right_column_body_bullet"></div>
+                            Set up and chill with friends in your very own college
+                        </div>
+                        
+                        <div class="join_right_column_body">
+                            
+                            <div class="join_right_column_body_bullet"></div>
+                            Make a classroom so that you can share ideas quickly    
+                        </div>
+                    </div>
+                    
+                    <div class="default_left_column_container">
+                        
+                        <div class="default_left_column_head" >Create your free account</div>
+                        
+                        <div class="join_left_column_form_container">
+                            
+                            <form method="post" action="/Join">
+                                
+                                <div class="join_left_column_form_input_container">
+                                    
+                                    <label class="join_left_column_form_input_label" for="firstName">First Name:
+                                        <span class="join_left_column_form_verification_output" id="firstName_verification_output"></span>
+                                    </label>
+                                    <input class="join_left_column_form_input_text" type="text" name="firstName" id="firstName" value="<%=loginBean.getFirstName() %>"/>
+                                </div>
+                                
+                                <div class="join_left_column_form_input_container">
+                                    <label class="join_left_column_form_input_label" for="lastName">Last Name:
+                                        <span class="join_left_column_form_verification_output" id="lastName_verification_output"></span>
+                                    </label>
+                                    <input class="join_left_column_form_input_text" type="text" name="lastName" id="lastName" value="<%=loginBean.getLastName() %>"/>
+                                </div>
+                                
+                                <div class="join_left_column_form_input_container">
+                                    <label class="join_left_column_form_input_label" for="screenName">Screen Name:
+                                        <span class="join_left_column_form_verification_output" id="screenName_verification_output"></span>
+                                    </label>
+                                    <input class="join_left_column_form_input_text" type="text" name="screenName" id="screenName" value="<%=loginBean.getScreenName() %>"/>
+                                </div>
+                                
+                                <div class="join_left_column_form_input_container">
+                                    <label class="join_left_column_form_input_label" for="email">Email:
+                                        <span class="join_left_column_form_verification_output" id="email_verification_output"></span>
+                                    </label>
+                                    <input class="join_left_column_form_input_text" type="text" name="email" id="email" value="<%=loginBean.getEmail() %>"/>
+                                </div>
+                                
+                                <div class="join_left_column_form_input_container">
+                                    <label class="join_left_column_form_input_label" for="userPassword">Password:
+                                        <span class="join_left_column_form_verification_output" id="userPassword_verification_output"></span>
+                                    </label>
+                                    <input class="join_left_column_form_input_text" type="password" name="userPassword" id="userPassword" />
+                                </div>
+                                
+                                <div class="join_left_column_form_input_container">
+                                    <label class="join_left_column_form_input_label" for="verifyPassword">Verify password:
+                                        <span class="join_left_column_form_verification_output" id="verifyPassword_verification_output"></span>
+                                    </label>
+                                    <input class="join_left_column_form_input_text" type="password" name="verifyPassword" id="verifyPassword" />
+                                </div>
+                                
+                                <div class="join_left_column_form_input_container">
+                                    
+                                    <label class="join_left_column_form_input_label" for="key">Are you human?:</label>
+                                    <input class="join_left_column_form_captcha_button" type="button" value="refresh.." id="refresh" />
+                                    
+                                    <div class="join_left_column_form_captcha_image" id="captcha" >
+                                        <img src="/security/captcha/captcha.jsp" alt="CAPTCHA"/>
+                                    </div>
+                                    
+                                    <input class="join_left_column_form_captcha_button" type="button" value="validate.." id="validate" />
+                                    
+                                    <input class="join_left_column_form_captcha_input" name="key" type="text" id="key" />
+                                    
+                                    <div id="answer" >
+                                        Please, enter the number above
+                                    </div>
+                                    
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <jsp:include flush="true" page="/include/footer.jsp" />
+                </div>
+            </div>
+        </div>
+        <jsp:include flush="true" page="/include/feedback.jsp" />
+    </body>
+</html>

@@ -1,0 +1,13 @@
+D
+/DestroyPachume.java/1.2/Mon Feb 23 11:21:32 2009//
+/GetPachume.java/1.2/Mon Feb 23 11:21:32 2009//
+/GetPachumeGroupId.java/1.2/Mon Feb 23 11:21:31 2009//
+/GetPachumeOwnersScreenName.java/1.2/Mon Feb 23 11:21:32 2009//
+/GetPachumeTags.java/1.2/Mon Feb 23 11:21:31 2009//
+/GetPacumeLocation.java/1.2/Mon Feb 23 11:21:32 2009//
+/InsertTags.java/1.4/Mon Mar 09 10:11:01 2009//
+/IsDeleatable.java/1.2/Mon Feb 23 11:21:32 2009//
+/IsPachumeSpamable.java/1.2/Mon Feb 23 11:21:32 2009//
+/IsSpamable.java/1.2/Mon Feb 23 11:21:31 2009//
+/MakePachume.java/1.6/Tue Mar 31 22:41:13 2009//
+/SpamThisPachume.java/1.2/Mon Feb 23 11:21:32 2009//

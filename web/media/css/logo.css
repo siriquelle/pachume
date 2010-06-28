@@ -1,0 +1,6 @@
+.logo_inner_item_dot{background-color:#66cc00;border:3px #000 solid;height:6px;left:24px;margin-bottom:25px;margin-top:10px;position:relative;text-align:left;top:5px;width:6px;}
+.logo_inner_item_dot_inner{bottom:12px;position:relative;right:3px;}
+.logo_inner_item_text{position:relative;top:-15px;}
+
+.logo_outer_container{background-color:#cc0000;border-color:#000;border-style:solid;border-width:3px 5px 3px 5px;font-family:'Courier New', Courier, monospace;font-size:25px;font-weight:bold;left:50px;margin-right:auto;position:relative;text-align:center;top:-40px;width:150px;}
+.logo_outer_container_link{color:#000;text-decoration:none;}

@@ -1,0 +1,9 @@
+.profile_left_column_container_comment_login{background-color:#fff;border:3px #000 solid;font-family:'Courier New', Courier, monospace;font-size:18px;font-weight:bold; margin-left:40px; margin-top:16px; padding:4px;text-align:center;width:546px;}
+.profile_left_column_container_comment_login_message{background-color:#a9d4ff;padding:0px 40px;}
+.profile_left_column_container_comment_submit{background-color:#66CC00;border:3px #000 solid;color:#000;cursor:pointer;display:inline;font-family:'Courier New', Courier, monospace;font-size:18px;font-weight:bold;margin-bottom:40px;margin-left:40px;margin-top:3px;text-align:center;width:140px;}
+.profile_left_column_container_comment_textarea{background-color:#fff;background-position:center left;background-repeat:no-repeat;border:3px #000 solid;font-family:'Courier New', Courier, monospace;font-size:18px;font-weight:bold;margin-left:40px;min-height:63px;margin-top:15px;padding:4px 4px;width:547px;}
+
+.profile_left_column_head_friend_container{background-color:#00cc00;border-color:#000;border-style:solid;border-width:3px 5px 3px 5px;color:#000;font-family:'Courier New';font-weight:bold;height:20px;margin-bottom:5px;margin-left:auto;margin-right:30px;text-align:center;text-decoration:none;width:427px;}
+.profile_left_column_head_friend_container a{color:#000;text-decoration:none;}
+
+.profile_presence_body_container{background-color:#fff;border:5px #000 solid;margin-bottom:2px;margin-left:163px;margin-top:18px;width:427px;}

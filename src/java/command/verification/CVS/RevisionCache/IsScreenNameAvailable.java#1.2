@@ -1,0 +1,50 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package command.verification;
+
+import java.sql.ResultSet;
+import model.DataBaseConnection;
+
+/**
+ *
+ * @author Siriquelle
+ */
+public class IsScreenNameAvailable {
+    //<editor-fold defaultstate="collapsed" desc="isScreenNameAvailable">
+    public static boolean run(String screenName) {
+
+        boolean isScreenNameAvailable = false;
+
+        try
+          {
+            if (screenName.length() > 2)
+              {
+                DataBaseConnection screenNameAvailable_db = new DataBaseConnection();
+                screenNameAvailable_db.connect();
+                String screenNameAvailable_sql = "SELECT screenName FROM user WHERE screenName = '" + screenName + "';";
+                ResultSet screenNameAvailable_rs = screenNameAvailable_db.execSQL(screenNameAvailable_sql);
+
+                if (screenNameAvailable_rs.next())
+                  {
+                    isScreenNameAvailable = false;
+                  } else
+                  {
+                    isScreenNameAvailable = true;
+                  }
+                screenNameAvailable_db.close();
+              } else
+              {
+                isScreenNameAvailable = false;
+              }
+          } catch (Exception e)
+          {
+            System.out.print(e.toString());
+          }
+
+        return isScreenNameAvailable;
+
+    }// </editor-fold>
+}

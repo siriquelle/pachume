@@ -1,0 +1,11 @@
+.hottopic_presence_body_container{background-color:#fff;border:3px #000 solid;margin:5px;min-height:50px;}
+
+.hottopic_presence_body_pachume{background-color:#eaeaea;font-family:'Courier New', Courier, monospace;margin:5px;min-height:24px;padding:4px;}
+
+.hottopic_presence_body_pachume a.inlink{background-position:bottom;background-repeat:repeat-x;color:#000000;font-size:16px;font-weight:bold;text-decoration:none;}
+.hottopic_presence_body_pachume a.inlink:hover{background-image:url(/media/images/link_bg_hover.png);color:#000000;}
+.hottopic_presence_body_pachume a.inlink:visited{color:#021D3E;}
+
+.hottopic_presence_body_pachume a.outlink{background-image:url(/media/images/link_bg_default.png);background-position:bottom;background-repeat:repeat-x;color:#85BBFD;font-size:18px;text-decoration:none;}
+.hottopic_presence_body_pachume a.outlink:hover{background-image:url(/media/images/link_bg_hover.png);color:#BBE88D;}
+.hottopic_presence_body_pachume a.outlink:visited{color:#C2DDFE;}

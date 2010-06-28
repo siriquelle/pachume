@@ -1,0 +1,6 @@
+.footer_column_inner_container{background-color:#000;border:5px #000 solid;height:30px;margin:5px;width:610px;}
+
+.footer_column_inner_container_list_container{color:#fff;font-family:Arial, Arial, Helvetica, sans-serif;font-size:12px;height:20px;margin-left:35px;margin-top:7px;width:620px;}
+.footer_column_inner_container_list_container a{color:#eee;text-decoration:none;}
+
+.footer_column_outer_container{background-color:#cc0000;border:3px #000 solid;float:left;margin-bottom:13px;min-height:50px;width:630px;}

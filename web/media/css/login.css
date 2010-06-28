@@ -1,0 +1,11 @@
+.login_left_column_form_container{background-color:#fff;border:1px #000 solid;margin-bottom:10px;margin-left:150px;margin-right:auto;margin-top:10px;padding-bottom:15px;padding-top:10px;width:384px;}
+
+.login_left_column_form_input_checkbox{display:inline;position:relative;top:3px;}
+.login_left_column_form_input_container{font-family:'Courier New', Courier, monospace;margin-left:auto;margin-right:auto;margin-top:5px;width:300px;}
+.login_left_column_form_input_label{font-size:22px;font-weight:bold;margin-bottom:-5px;}
+.login_left_column_form_input_label_checkbox{font-size:15px;font-weight:bold;margin-bottom:-5px;}
+.login_left_column_form_input_submit{background-color:#66cc00;border:1px #000 solid;cursor:pointer;font-family:inherit;font-size:22px;font-weight:bold;margin-left:152px;margin-top:15px;text-align:left;}
+.login_left_column_form_input_text{background-color:#faffbd;border:1px #ccc solid;font-family:inherit;font-size:22px;width:300px;}
+
+.login_right_column_body{background-color:#fff;border:3px #000 solid;font-family:arial;font-size:14px;margin:10px 22px 5px 22px;padding:5px 22px;}
+.login_right_column_body_bullet{background-color:#66cc00;border:3px #000 solid;float:left;height:5px;left:-1px;margin:2px 5px 20px -16px;position:relative;top:-4px;width:5px;}

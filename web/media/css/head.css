@@ -1,0 +1,12 @@
+.head_background_layer{background-color:#cc0000;border-bottom:5px black solid;height:35px;width:100%;}
+
+.head_menu_container{font-family:verdana;font-size:25px;position:relative;right:50px;text-align:right;top:-8px;}
+
+.head_menu_item_devider{background-color:#66cc00;border-color:#000;border-style:solid;border-width:3px 5px 3px 5px;display:inline;font-family:arial;font-size:0.5em;padding:5px;position:relative;text-align:left;top:15px;}
+
+.head_menu_item_link{background-color:#cc0000;border-color:#000;border-style:solid;border-width:3px 5px 3px 5px;display:inline;font-family:arial;font-size:0.5em;padding:5px;position:relative;text-align:left;top:15px;}
+.head_menu_item_link a{color:#000;text-decoration:none;}
+.head_menu_item_link:hover{border-color:#880000;}
+
+.head_menu_item_link_active{background-color:#cc0000;border-color:#880000;border-style:solid;border-width:3px 5px 3px 5px;display:inline;font-family:arial;font-size:0.5em;padding:5px;position:relative;text-align:left;top:15px;}
+.head_menu_item_link_active a{color:#000;text-decoration:none;}

@@ -1,0 +1,71 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package command.conversion;
+
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ *
+ * @author Siriquelle
+ */
+public class GetGoTo {
+    //<editor-fold defaultstate="collapsed" desc="getGoTo">
+
+    public static String run(HttpServletRequest request) {
+        String goTo = null;
+        if (request.getHeader("Referer") == null)
+          {
+            goTo = "http://pachume.com/?";
+          } else if (!request.getHeader("Referer").contains("pachume.com"))
+          {
+            goTo = "http://pachume.com/?";
+          } //else if (!request.getHeader("Referer").contains("localhost"))
+        //{
+        //  goTo = "http://pachume.com/?";
+        //  }
+        else
+          {
+            goTo = request.getHeader("Referer");
+            try
+              {
+                goTo = goTo.replaceAll(goTo.substring(goTo.indexOf("message"), goTo.length()), "");
+              } catch (Exception e)
+              {
+                System.out.print(e);
+              }
+
+            if (goTo.contains("&"))
+              {
+                if (goTo.charAt(goTo.length() - 1) == '&')
+                  {
+                    //do nothing
+                  } else
+                  {
+                    if (goTo.charAt(goTo.length() - 1) == '?')
+                      {
+                        goTo.replace(goTo.charAt(goTo.length() - 1), '&');
+                      } else
+                      {
+                        goTo += "&";
+                      }
+                  }
+              } else if (goTo.contains("?"))
+              {
+                if (goTo.charAt(goTo.length() - 1) == '?')
+                  {
+                    //do nothing
+                  } else
+                  {
+                    goTo += "&";
+                  }
+              } else
+              {
+                goTo += "?";
+              }
+          }
+        return goTo;
+    }// </editor-fold>
+}

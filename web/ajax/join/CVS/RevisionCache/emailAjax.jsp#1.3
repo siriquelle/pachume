@@ -1,0 +1,15 @@
+<%@page import="command.verification.IsEmailAvailable" %>
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+
+<% if (request.getParameter("email") != null)
+              {
+                String email = request.getParameter("email");
+                if (IsEmailAvailable.run(email))
+                  {%>
+:) <img src="/media/images/join_validation_success.png" width="17px" height="17px"/>
+<%} else
+  {%>
+:( <img src="/media/images/join_validation_failure.png" width="17px" height="17px"/> 
+<%}%>
+<%}%>
